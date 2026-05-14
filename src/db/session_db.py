@@ -20,6 +20,9 @@ SessionLocal = sessionmaker(
 # Maps Python classes to database Tables
 
 class Base(DeclarativeBase):
+    pass
+
+class TimestampMixin:
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
@@ -29,9 +32,8 @@ class Base(DeclarativeBase):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime,
         default=datetime.utcnow,
-        onupdate=datetime.now(timezone.utc)
+        onupdate=datetime.utcnow
     )
-
 # DB DEPENDENCY
 def get_db():
     db = SessionLocal()

@@ -1,17 +1,27 @@
 from fastapi import FastAPI
-from src.schemas.user_schema import UserCreate
+
 from src.core.config import settings
-from src.routers.user_routes import router
+
+from src.routes.user_routes import router
+
+from src.db.session_db import engine, Base
+
+from src.models.user_model import User
+from src.models.otp_model import OTPVerification
 
 
-app=FastAPI()
+app = FastAPI()
+
+
+Base.metadata.create_all(bind=engine)
+
+
 app.include_router(router)
-@app.get('/Info')
+
+
+@app.get("/info")
 def fun():
-    return('This is a True Statement')
 
-@app.post('/User')
-def User(user:UserCreate):
-    return 'Successfully created'           
-            
-
+    return {
+        "message": "This is a True Statement"
+    }

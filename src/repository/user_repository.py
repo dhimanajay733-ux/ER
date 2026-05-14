@@ -28,7 +28,6 @@ def get_user_by_id(
         .first()
     )
 
-
 # CREATE USER
 def create_user(
     db: Session,
@@ -38,6 +37,7 @@ def create_user(
 
     new_user = User(
         first_name=user_data.first_name,
+        last_name=user_data.last_name,
         email=user_data.email,
         password=hashed_password
     )
@@ -74,3 +74,4 @@ def delete_user(
     db.delete(user)
 
     db.flush()
+

@@ -1,11 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-
 from src.db.session_db import get_db
-
 from src.schemas.user_schema import (
     UserCreate,
-    UserResponse
+    UserResponse,
+    UserLogin
 )
 
 from src.services.user_service import (
@@ -20,7 +19,9 @@ router = APIRouter(
 )
 
 
+# =========================
 # REGISTER
+# =========================
 @router.post(
     "/register",
     response_model=UserResponse
@@ -36,16 +37,17 @@ def register(
     )
 
 
+# =========================
 # LOGIN
+# =========================
 @router.post("/login")
 def login(
-    email: str,
-    password: str,
+    user_data: UserLogin,
     db: Session = Depends(get_db)
 ):
 
     return login_user(
         db=db,
-        email=email,
-        password=password
+        email=user_data.email,
+        password=user_data.password
     )
