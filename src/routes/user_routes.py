@@ -12,6 +12,11 @@ from src.services.user_service import (
     login_user
 )
 
+from src.services.token_service import (
+    active_users,
+    active_sessions
+)
+
 
 router = APIRouter(
     prefix="/api/v1/auth",
@@ -19,9 +24,7 @@ router = APIRouter(
 )
 
 
-# =========================
 # REGISTER
-# =========================
 @router.post(
     "/register",
     response_model=UserResponse
@@ -37,9 +40,7 @@ def register(
     )
 
 
-# =========================
 # LOGIN
-# =========================
 @router.post("/login")
 def login(
     user_data: UserLogin,
@@ -51,3 +52,15 @@ def login(
         email=user_data.email,
         password=user_data.password
     )
+
+# Active users
+@router.get("/active-users")
+def get_active_users_route(
+    db: Session = Depends(get_db)
+):
+
+    total_users = active_users(db)
+
+    return {
+        "active_users": total_users
+    }

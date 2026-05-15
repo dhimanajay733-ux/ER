@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from src.repository.user_repository import get_user_by_email,get_user_by_id,update_user,delete_user,create_user
+from src.repository.user_repository import get_user_by_email,create_user,get_user_by_id
 
 
 from src.schemas.user_schema import UserCreate
@@ -10,7 +10,6 @@ from src.core.security import (
     verify_password,
     create_access_token
 )
-
 
 # REGISTER USER
 def register_user(

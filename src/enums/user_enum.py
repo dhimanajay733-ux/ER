@@ -4,3 +4,4 @@ class UserRole(str, Enum):
     ADMIN = "admin"
     SELLER = "seller"
     USER = "user"
+

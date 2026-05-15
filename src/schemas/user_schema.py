@@ -4,7 +4,7 @@ from src.enums.user_enum import UserRole
 
 class UserCreate(BaseModel):
         first_name: str
-        last_name:str
+        last_name:str | None = None
         email: EmailStr
         password: str
         role: UserRole = UserRole.USER
@@ -22,7 +22,6 @@ class UserResponse(BaseModel):
         model_config = ConfigDict(
             from_attributes=True
         )
-
         id: int
         first_name: str
         last_name: str
@@ -32,7 +31,6 @@ class UserResponse(BaseModel):
         created_at: datetime
         updated_at: datetime
 
-    
 class UserLogin(BaseModel):
 
     email: EmailStr

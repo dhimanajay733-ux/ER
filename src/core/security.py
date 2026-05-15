@@ -1,9 +1,16 @@
 from datetime import datetime, timedelta, timezone
+import uuid
 
 from jose import jwt
 from passlib.context import CryptContext
-# from passlib import crypto
+
 from src.core.config import settings
+
+
+# GENERATE JTI
+def generate_jti() -> str:
+
+    return str(uuid.uuid4())
 
 
 # PASSWORD HASHING CONTEXT
@@ -11,6 +18,7 @@ pwd_context = CryptContext(
     schemes=["bcrypt"],
     deprecated="auto"
 )
+
 
 # HASH PASSWORD
 def hash_password(password: str) -> str:
@@ -32,7 +40,8 @@ def verify_password(
 
 # CREATE ACCESS TOKEN
 def create_access_token(
-    user_id: int
+    user_id: int,
+    jti: str
 ) -> str:
 
     expire = datetime.now(
@@ -43,6 +52,7 @@ def create_access_token(
 
     payload = {
         "sub": str(user_id),
+        "jti": jti,
         "exp": expire
     }
 

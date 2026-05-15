@@ -1,9 +1,13 @@
 from sqlalchemy.orm import Session
+
 from src.models.user_model import User
+
 from src.schemas.user_schema import UserCreate
 
 
+# =========================
 # GET USER BY EMAIL
+# =========================
 def get_user_by_email(
     db: Session,
     email: str
@@ -16,7 +20,9 @@ def get_user_by_email(
     )
 
 
+# =========================
 # GET USER BY ID
+# =========================
 def get_user_by_id(
     db: Session,
     user_id: int
@@ -28,7 +34,10 @@ def get_user_by_id(
         .first()
     )
 
+
+# =========================
 # CREATE USER
+# =========================
 def create_user(
     db: Session,
     user_data: UserCreate,
@@ -36,21 +45,30 @@ def create_user(
 ):
 
     new_user = User(
+
         first_name=user_data.first_name,
+
         last_name=user_data.last_name,
+
         email=user_data.email,
-        password=hashed_password
+
+        password=hashed_password,
+
+        role=user_data.role
     )
 
     db.add(new_user)
 
     db.flush()
+
     db.refresh(new_user)
 
     return new_user
 
 
+# =========================
 # UPDATE USER
+# =========================
 def update_user(
     db: Session,
     user: User
@@ -65,7 +83,9 @@ def update_user(
     return user
 
 
+# =========================
 # DELETE USER
+# =========================
 def delete_user(
     db: Session,
     user: User
@@ -74,4 +94,3 @@ def delete_user(
     db.delete(user)
 
     db.flush()
-
