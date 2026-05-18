@@ -5,9 +5,7 @@ from src.models.user_model import User
 from src.schemas.user_schema import UserCreate
 
 
-# =========================
 # GET USER BY EMAIL
-# =========================
 def get_user_by_email(
     db: Session,
     email: str
@@ -20,9 +18,7 @@ def get_user_by_email(
     )
 
 
-# =========================
 # GET USER BY ID
-# =========================
 def get_user_by_id(
     db: Session,
     user_id: int
@@ -35,9 +31,7 @@ def get_user_by_id(
     )
 
 
-# =========================
 # CREATE USER
-# =========================
 def create_user(
     db: Session,
     user_data: UserCreate,
@@ -54,7 +48,7 @@ def create_user(
 
         password=hashed_password,
 
-        role=user_data.role
+        # role=user_data.USER
     )
 
     db.add(new_user)
@@ -66,9 +60,7 @@ def create_user(
     return new_user
 
 
-# =========================
 # UPDATE USER
-# =========================
 def update_user(
     db: Session,
     user: User
@@ -83,9 +75,7 @@ def update_user(
     return user
 
 
-# =========================
 # DELETE USER
-# =========================
 def delete_user(
     db: Session,
     user: User

@@ -41,3 +41,7 @@ class User(TimestampMixin, Base):
         Boolean,
         default=True
     )
+    is_verified: Mapped[bool] = mapped_column(
+    Boolean,
+    default=False
+)

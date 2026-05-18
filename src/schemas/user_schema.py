@@ -7,7 +7,7 @@ class UserCreate(BaseModel):
         last_name:str | None = None
         email: EmailStr
         password: str
-        role: UserRole = UserRole.USER
+        # role: UserRole = UserRole.USER
 
 class UserUpdate(BaseModel):
         first_name: str | None = None
@@ -26,7 +26,7 @@ class UserResponse(BaseModel):
         first_name: str
         last_name: str
         email: EmailStr
-        role: UserRole
+        # role: UserRole
         is_active: bool
         created_at: datetime
         updated_at: datetime

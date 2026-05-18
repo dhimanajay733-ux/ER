@@ -10,11 +10,7 @@ from src.models.user_model import User
 from src.models.otp_model import OTPVerification
 from src.models.token_model import UserToken
 
-
 app = FastAPI()
-
-
-
 app.include_router(router)
 
 
@@ -22,13 +18,8 @@ app.include_router(router)
 def fun():
 
     return {
-        "message": "This is a True Statement"
+        "message": "This is a Production ready Code"
     }
 
 # print(Base.metadata.tables.keys())
-
-
-
-
-
 Base.metadata.create_all(bind=engine)

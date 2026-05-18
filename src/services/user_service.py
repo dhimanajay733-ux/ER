@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from src.repository.user_repository import get_user_by_email,create_user,get_user_by_id
-
-
+from src.repository.user_repository import (
+    get_user_by_email,
+    create_user)
 from src.schemas.user_schema import UserCreate
 
 from src.core.security import (
@@ -61,12 +61,6 @@ def login_user(
     email: str,
     password: str
 ):
-# def login_user(
-#     db,
-#     email,
-#     password
-# ):
-
     # GET USER
     user = get_user_by_email(
         db,
