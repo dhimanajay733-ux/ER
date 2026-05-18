@@ -24,5 +24,9 @@ class AppSettings(BaseSettings):
         alias="ACCESS_TOKEN_EXPIRE_MINUTES"
     )
 
+    smtp_email: str
+    smtp_password: str
+    smtp_host: str
+    smtp_port: int
 
 settings = AppSettings()
