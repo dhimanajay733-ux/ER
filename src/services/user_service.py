@@ -2,14 +2,30 @@ from sqlalchemy.orm import Session
 
 from src.repository.user_repository import (
     get_user_by_email,
-    create_user)
-from src.schemas.user_schema import UserCreate
+    create_user
+)
+
+from src.schemas.user_schema import (
+    UserCreate
+)
 
 from src.core.security import (
     hash_password,
     verify_password,
-    create_access_token
+    create_access_token,
+    generate_jti
 )
+
+from src.exceptions.user_exception import (
+    UserNotVerifiedException,
+    UserAlreadyExistsException,
+    InvalidCredentialsException
+)
+
+from src.services.otp_service import (
+    generate_otp_service
+)
+
 
 # REGISTER USER
 def register_user(
@@ -17,16 +33,15 @@ def register_user(
     user_data: UserCreate
 ):
     
-    # CHECK IF USER EXISTS
+    #CHECK ID USER EXISTS
     existing_user = get_user_by_email(
         db,
         user_data.email
     )
 
     if existing_user:
-        raise ValueError(
-            "User with this email already exists"
-        )
+
+        raise UserAlreadyExistsException()
 
     # HASH PASSWORD
     hashed_password = hash_password(
@@ -42,25 +57,29 @@ def register_user(
             hashed_password=hashed_password
         )
 
-        # COMMIT TRANSACTION
+        # COMMIT USER
         db.commit()
+
+        # GENERATE OTP
+        generate_otp_service(
+            db=db,
+            email=new_user.email
+        )
 
         return new_user
 
     except Exception as e:
-
-        # ROLLBACK IF ERROR
         db.rollback()
-
         raise e
 
 
-#LOGIN USER
+# LOGIN USER
 def login_user(
     db: Session,
     email: str,
     password: str
 ):
+
     # GET USER
     user = get_user_by_email(
         db,
@@ -69,9 +88,13 @@ def login_user(
 
     # CHECK USER EXISTS
     if not user:
-        raise ValueError(
-            "Invalid email or password"
-        )
+
+        raise InvalidCredentialsException()
+
+    # CHECK VERIFIED
+    if not user.is_verified:
+
+        raise UserNotVerifiedException()
 
     # VERIFY PASSWORD
     is_valid_password = verify_password(
@@ -80,13 +103,16 @@ def login_user(
     )
 
     if not is_valid_password:
-        raise ValueError(
-            "Invalid email or password"
-        )
+
+        raise InvalidCredentialsException()
+
+    # GENERATE JTI
+    jti = generate_jti()
 
     # CREATE ACCESS TOKEN
     access_token = create_access_token(
-        user.id
+        user.id,
+        jti
     )
 
     return {

@@ -1,8 +1,14 @@
 from sqlalchemy.orm import Session
-
+from fastapi import HTTPException,status
 from src.models.user_model import User
 
 from src.schemas.user_schema import UserCreate
+
+from src.exceptions.database_exception import (
+    DatabaseInsertException,
+    DatabaseFetchException,
+    DatabaseUpdateException
+)
 
 
 # GET USER BY EMAIL
@@ -11,11 +17,17 @@ def get_user_by_email(
     email: str
 ):
 
-    return (
-        db.query(User)
-        .filter(User.email == email)
-        .first()
-    )
+    try:
+
+        return (
+            db.query(User)
+            .filter(User.email == email)
+            .first()
+        )
+
+    except Exception as e:
+
+        raise DatabaseFetchException
 
 
 # GET USER BY ID
@@ -24,11 +36,17 @@ def get_user_by_id(
     user_id: int
 ):
 
-    return (
-        db.query(User)
-        .filter(User.id == user_id)
-        .first()
-    )
+    try:
+
+        return (
+            db.query(User)
+            .filter(User.id == user_id)
+            .first()
+        )
+
+    except Exception as e:
+
+        raise DatabaseFetchException
 
 
 # CREATE USER
@@ -38,27 +56,32 @@ def create_user(
     hashed_password: str
 ):
 
-    new_user = User(
+    try:
 
-        first_name=user_data.first_name,
+        new_user = User(
 
-        last_name=user_data.last_name,
+            first_name=user_data.first_name,
 
-        email=user_data.email,
+            last_name=user_data.last_name,
 
-        password=hashed_password,
+            email=user_data.email,
 
-        # role=user_data.USER
-    )
+            password=hashed_password
+        )
 
-    db.add(new_user)
+        db.add(new_user)
 
-    db.flush()
+        db.flush()
 
-    db.refresh(new_user)
+        db.refresh(new_user)
 
-    return new_user
+        return new_user
 
+    except Exception as e:
+
+        print(e)
+
+        raise e
 
 # UPDATE USER
 def update_user(
@@ -66,13 +89,21 @@ def update_user(
     user: User
 ):
 
-    db.add(user)
+    try:
 
-    db.flush()
+        db.add(user)
 
-    db.refresh(user)
+        db.flush()
 
-    return user
+        db.refresh(user)
+
+        return user
+
+    except Exception as e:
+
+        db.rollback()
+
+        raise DatabaseUpdateException
 
 
 # DELETE USER
@@ -81,6 +112,14 @@ def delete_user(
     user: User
 ):
 
-    db.delete(user)
+    try:
 
-    db.flush()
+        db.delete(user)
+
+        db.flush()
+
+    except Exception as e:
+
+        db.rollback()
+
+        raise DatabaseUpdateException

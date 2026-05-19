@@ -9,6 +9,7 @@ from src.db.session_db import engine, Base
 from src.models.user_model import User
 from src.models.otp_model import OTPVerification
 from src.models.token_model import UserToken
+from src.routes.otp_routes import router as otp_router
 
 app = FastAPI()
 app.include_router(router)
@@ -20,6 +21,8 @@ def fun():
     return {
         "message": "This is a Production ready Code"
     }
+
+app.include_router(otp_router)
 
 # print(Base.metadata.tables.keys())
 Base.metadata.create_all(bind=engine)

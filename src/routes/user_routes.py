@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from src.db.session_db import get_db
 from src.schemas.user_schema import (
@@ -19,7 +19,7 @@ from src.services.token_service import (
 
 
 router = APIRouter(
-    prefix="/api/v1/auth",
+    prefix="/api/auth",
     tags=["Authentication"]
 )
 
@@ -27,7 +27,8 @@ router = APIRouter(
 # REGISTER
 @router.post(
     "/register",
-    response_model=UserResponse
+    response_model=UserResponse,
+    status_code=status.HTTP_201_CREATED
 )
 def register(
     user_data: UserCreate,

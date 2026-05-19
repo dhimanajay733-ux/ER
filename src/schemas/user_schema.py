@@ -22,14 +22,14 @@ class UserResponse(BaseModel):
         model_config = ConfigDict(
             from_attributes=True
         )
-        id: int
+        id: str
         first_name: str
         last_name: str
         email: EmailStr
         # role: UserRole
         is_active: bool
-        created_at: datetime
-        updated_at: datetime
+        # created_at: int
+        # updated_at: int
 
 class UserLogin(BaseModel):
 

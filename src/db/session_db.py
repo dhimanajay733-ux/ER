@@ -1,7 +1,9 @@
 from sqlalchemy import create_engine, DateTime
-from datetime import datetime,timezone
+#from datetime import datetime,timezone
 from sqlalchemy.orm import sessionmaker,Mapped,mapped_column,DeclarativeBase
 from src.core.config import settings
+import time
+from sqlalchemy import BigInteger
 
 # ENGINE
 engine = create_engine(
@@ -24,15 +26,15 @@ class Base(DeclarativeBase):
 
 class TimestampMixin:
 
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=datetime.utcnow
+    created_at: Mapped[int] = mapped_column(
+        BigInteger,
+        default=lambda: int(time.time())
     )
 
-    updated_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=datetime.utcnow,
-        onupdate=datetime.utcnow
+    updated_at: Mapped[int] = mapped_column(
+        BigInteger,
+        default=lambda: int(time.time()),
+        onupdate=lambda: int(time.time())
     )
 # DB DEPENDENCY
 def get_db():

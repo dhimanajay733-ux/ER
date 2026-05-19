@@ -25,7 +25,7 @@ class OTPVerification(TimestampMixin, Base):
         primary_key=True
     )
 
-    user_id: Mapped[int] = mapped_column(
+    user_id: Mapped[str] = mapped_column(
         ForeignKey("users.id")
     )
 
@@ -42,4 +42,4 @@ class OTPVerification(TimestampMixin, Base):
         default=False
     )
 
-    expires_at: Mapped[datetime] = mapped_column()
+    expires_at: Mapped[int] = mapped_column()

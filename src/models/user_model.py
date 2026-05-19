@@ -4,14 +4,18 @@ from sqlalchemy import String, Boolean, Enum
 from src.enums.user_enum import UserRole
 
 from src.db.session_db import Base, TimestampMixin
-
+from src.utils import (
+    generate_uuid
+)
 
 class User(TimestampMixin, Base):
 
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(
-        primary_key=True
+        String(36),
+        primary_key=True,
+        default=generate_uuid
     )
 
     first_name: Mapped[str] = mapped_column(
