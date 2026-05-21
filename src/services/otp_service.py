@@ -65,7 +65,8 @@ def send_otp_email(
 # GENERATE OTP SERVICE
 def generate_otp_service(
     db: Session,
-    email: str
+    email: str,
+    otp_type:str
 ):
 
     # GET USER
@@ -83,25 +84,23 @@ def generate_otp_service(
     otp_code = create_otp()
 
     # OTP EXPIRY (5 MINUTES)
-    expires_at = int(time.time()) + 300
-
+    expires_at = int(time.time() * 1000) + (5 * 60 * 1000)
     # STORE OTP
     create_otp_record(
         db=db,
         user_id=user.id,
         otp_code=otp_code,
-        otp_type="EMAIL_VERIFICATION",
+        otp_type=otp_type,
         expires_at=expires_at
     )
-
-    # COMMIT
-    db.commit()
-
     # SEND EMAIL
     send_otp_email(
         email,
         otp_code
     )
+       # COMMIT
+    db.commit()
+
 
     return {
         "message": "OTP sent successfully"
@@ -134,7 +133,7 @@ def verify_otp_service(
     )
 
     # CHECK EXPIRY
-    if int(time.time()) > otp_record.expires_at:
+    if int(time.time()*1000) > otp_record.expires_at:
 
         raise OTPExpiredException()
 

@@ -5,9 +5,7 @@ from src.repository.user_repository import (
     create_user
 )
 
-from src.schemas.user_schema import (
-    UserCreate
-)
+from src.schemas.user_schema import UserCreate
 
 from src.core.security import (
     hash_password,
@@ -25,7 +23,6 @@ from src.exceptions.user_exception import (
 from src.services.otp_service import (
     generate_otp_service
 )
-
 
 # REGISTER USER
 def register_user(
@@ -63,7 +60,8 @@ def register_user(
         # GENERATE OTP
         generate_otp_service(
             db=db,
-            email=new_user.email
+            email=new_user.email,
+            otp_type="Email_Verification"
         )
 
         return new_user

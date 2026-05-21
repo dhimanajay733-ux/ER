@@ -17,7 +17,7 @@ class User(TimestampMixin, Base):
         primary_key=True,
         default=generate_uuid
     )
-
+    
     first_name: Mapped[str] = mapped_column(
         String(100)
     )

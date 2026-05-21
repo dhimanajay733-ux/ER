@@ -1,9 +1,8 @@
-from datetime import datetime
-
 from sqlalchemy import (
     String,
     ForeignKey,
-    Boolean
+    Boolean,
+    BigInteger
 )
 
 from sqlalchemy.orm import (
@@ -42,4 +41,6 @@ class OTPVerification(TimestampMixin, Base):
         default=False
     )
 
-    expires_at: Mapped[int] = mapped_column()
+    expires_at: Mapped[int] = mapped_column(
+        BigInteger
+    )

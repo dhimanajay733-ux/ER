@@ -65,3 +65,4 @@ def get_active_users_route(
     return {
         "active_users": total_users
     }
+

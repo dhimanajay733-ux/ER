@@ -1,11 +1,9 @@
-from datetime import datetime
-
 from sqlalchemy import (
     String,
     ForeignKey,
     Boolean,
-    DateTime,
-    Enum
+    Enum,
+    BigInteger
 )
 
 from sqlalchemy.orm import (
@@ -20,16 +18,22 @@ from src.db.session_db import (
 
 from src.enums.token_enum import TokenType
 
+from src.utils import (
+    generate_uuid
+)
+
 
 class UserToken(TimestampMixin, Base):
 
     __tablename__ = "user_tokens"
 
-    id: Mapped[int] = mapped_column(
-        primary_key=True
+    id: Mapped[str] = mapped_column(
+        String(36),
+        primary_key=True,
+        default=generate_uuid
     )
 
-    user_id: Mapped[int] = mapped_column(
+    user_id: Mapped[str] = mapped_column(
         ForeignKey("users.id")
     )
 
@@ -53,11 +57,11 @@ class UserToken(TimestampMixin, Base):
         default=False
     )
 
-    expires_at: Mapped[datetime] = mapped_column(
-        DateTime
+    expires_at: Mapped[int] = mapped_column(
+        BigInteger
     )
 
-    last_used_at: Mapped[datetime | None] = mapped_column(
-        DateTime,
+    last_used_at: Mapped[int | None] = mapped_column(
+        BigInteger,
         nullable=True
     )

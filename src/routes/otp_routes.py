@@ -32,7 +32,7 @@ router = APIRouter(
 )
 
 
-# GENERATE OTP
+#  GENERATE OTP
 @router.post("/generate")
 def generate_otp(
     email: str,

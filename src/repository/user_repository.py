@@ -24,7 +24,6 @@ def get_user_by_email(
             .filter(User.email == email)
             .first()
         )
-
     except Exception as e:
 
         raise DatabaseFetchException
