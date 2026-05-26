@@ -1,4 +1,3 @@
-from datetime import datetime
 from pydantic import BaseModel, EmailStr, ConfigDict
 from src.enums.user_enum import UserRole
 

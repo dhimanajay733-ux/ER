@@ -11,6 +11,7 @@ def generate_jti() -> str:
 
     return str(uuid.uuid4())
 
+
 # PASSWORD HASHING CONTEXT
 pwd_context = CryptContext(
     schemes=["bcrypt"],
@@ -35,8 +36,9 @@ def verify_password(
 
 # CREATE ACCESS TOKEN
 def create_access_token(
-    user_id: int,
-    jti: str
+    user_id: str,
+    jti: str,
+    role:str
 ) -> str:
 
     expire = datetime.now(
@@ -48,7 +50,8 @@ def create_access_token(
     payload = {
         "sub": str(user_id),
         "jti": jti,
-        "exp": expire
+        "exp": expire,
+        "role": role
     }
 
     token = jwt.encode(

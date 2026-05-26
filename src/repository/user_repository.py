@@ -10,7 +10,6 @@ from src.exceptions.database_exception import (
     DatabaseUpdateException
 )
 
-
 # GET USER BY EMAIL
 def get_user_by_email(
     db: Session,
@@ -104,7 +103,6 @@ def update_user(
 
         raise DatabaseUpdateException
 
-
 # DELETE USER
 def delete_user(
     db: Session,
@@ -122,3 +120,6 @@ def delete_user(
         db.rollback()
 
         raise DatabaseUpdateException
+    
+
+
