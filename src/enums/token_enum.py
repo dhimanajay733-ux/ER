@@ -4,5 +4,4 @@ from enum import Enum
 class TokenType(str, Enum):
 
     ACCESS = "ACCESS"
-
     REFRESH = "REFRESH"

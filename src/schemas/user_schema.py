@@ -2,13 +2,15 @@ from pydantic import BaseModel, EmailStr, ConfigDict
 from src.enums.user_enum import UserRole
 
 class UserCreate(BaseModel):
+
         first_name: str
-        last_name:str | None = None
+        last_name:str | None 
         email: EmailStr
         password: str
         # role: UserRole = UserRole.USER
 
 class UserUpdate(BaseModel):
+
         first_name: str | None = None
         last_name: str | None = None
         email: EmailStr | None = None
@@ -33,8 +35,8 @@ class UserResponse(BaseModel):
 class UserLogin(BaseModel):
 
     email: EmailStr
-
     password: str
 
 class ForgotPassword(BaseModel):
-       email : EmailStr
+       
+    email : EmailStr

@@ -17,12 +17,10 @@ from src.services.token_service import (
     active_sessions
 )
 
-
 router = APIRouter(
     prefix="/api/auth",
     tags=["Authentication"]
 )
-
 
 # REGISTER
 @router.post(
@@ -39,7 +37,6 @@ def register(
         db=db,
         user_data=user_data
     )
-
 
 # LOGIN
 @router.post("/login")
@@ -65,4 +62,3 @@ def get_active_users_route(
     return {
         "active_users": total_users
     }
-

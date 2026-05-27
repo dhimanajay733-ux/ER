@@ -1,34 +1,97 @@
-from fastapi import APIRouter
-from fastapi import Depends
-from fastapi import HTTPException
+from fastapi import (
+    APIRouter,
+    Depends,
+    HTTPException,
+    UploadFile,
+    File,
+    Form
+)
 
 from sqlalchemy.orm import Session
+
 from src.db.session_db import get_db
-from src.schemas.product_schema import ProductCreate
+
+from src.schemas.product_schema import (
+    ProductCreate,
+    ProductUpdate
+)
 
 from src.services.product_service import (
     create_product,
     get_products,
+    search_products,
     get_product_by_id,
     update_product,
-    delete_product)
+    delete_product
+)
+
+from src.services.cloudinary_service import (
+    upload_product_image
+)
 
 router = APIRouter(
     prefix="/products",
     tags=["Products"]
 )
 
+
+# CREATE PRODUCT
 @router.post("/")
 def create_product_api(
-    payload: ProductCreate,
+
+    name: str = Form(...),
+
+    price: float = Form(...),
+
+    description: str = Form(...),
+
+    sub_category_id: int = Form(...),
+
+    seller_id: str = Form(...),
+
+    quantity: int = Form(...),
+
+    size: str | None = Form(None),
+
+    color: str | None = Form(None),
+
+    image: UploadFile = File(...),
+
     db: Session = Depends(get_db)
 ):
+
+    image_url = upload_product_image(
+        image.file
+    )
+
+    payload = ProductCreate(
+
+        name=name,
+
+        price=price,
+
+        description=description,
+
+        sub_category_id=sub_category_id,
+
+        seller_id=seller_id,
+
+        quantity=quantity,
+
+        size=size,
+
+        color=color,
+
+        image_link=image_url
+    )
+
     return create_product(
         db=db,
         payload=payload
     )
 
 
+# GET ALL PRODUCTS
 @router.get("/")
 def get_products_api(
     db: Session = Depends(get_db)
@@ -36,7 +99,37 @@ def get_products_api(
     return get_products(db)
 
 
-@router.get("/product_id")
+# SEARCH PRODUCTS
+@router.get("/search/")
+def search_products_api(
+
+    search: str | None = None,
+
+    subcategory_id: int | None = None,
+
+    min_price: float | None = None,
+
+    max_price: float | None = None,
+
+    db: Session = Depends(get_db)
+):
+
+    return search_products(
+
+        db=db,
+
+        search=search,
+
+        subcategory_id=subcategory_id,
+
+        min_price=min_price,
+
+        max_price=max_price
+    )
+
+
+# GET PRODUCT BY ID
+@router.get("/{product_id}")
 def get_product_by_id_api(
     product_id: int,
     db: Session = Depends(get_db)
@@ -48,17 +141,23 @@ def get_product_by_id_api(
     )
 
     if not product:
+
         raise HTTPException(
             status_code=404,
             detail="Product not found"
         )
+
     return product
 
 
-@router.put("/product_id")
+# UPDATE PRODUCT
+@router.put("/{product_id}")
 def update_product_api(
+
     product_id: int,
-    payload: ProductCreate,
+
+    payload: ProductUpdate,
+
     db: Session = Depends(get_db)
 ):
 
@@ -69,6 +168,7 @@ def update_product_api(
     )
 
     if not product:
+
         raise HTTPException(
             status_code=404,
             detail="Product not found"
@@ -77,7 +177,8 @@ def update_product_api(
     return product
 
 
-@router.delete("/product_id")
+# DELETE PRODUCT
+@router.delete("/{product_id}")
 def delete_product_api(
     product_id: int,
     db: Session = Depends(get_db)
@@ -89,6 +190,7 @@ def delete_product_api(
     )
 
     if not deleted:
+
         raise HTTPException(
             status_code=404,
             detail="Product not found"

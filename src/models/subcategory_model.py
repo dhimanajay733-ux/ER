@@ -6,7 +6,8 @@ from sqlalchemy import (
 
 from sqlalchemy.orm import (
     Mapped,
-    mapped_column
+    mapped_column,
+    relationship
 )
 
 from src.db.session_db import (
@@ -38,3 +39,7 @@ class SubCategory(
         Text,
         nullable=True
     )
+    products = relationship(
+    "Product",
+    back_populates="subcategory"
+)

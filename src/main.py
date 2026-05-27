@@ -21,7 +21,7 @@ from src.routes.resend_otp_routes import(
 from src.routes.product_router import router as product_router
 from src.routes.category_routes import router as category_router
 from src.routes.subcategory_routes import router as sub_category_router
-
+from src.routes.seller_information_routes import router as store_router
 
 app = FastAPI()
 app.include_router(router)
@@ -41,6 +41,7 @@ app.include_router(resend_routers)
 app.include_router(product_router)
 app.include_router(category_router)
 app.include_router(sub_category_router)
+app.include_router(store_router)
 
 
 # print(Base.metadata.tables.keys())
