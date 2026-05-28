@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from fastapi import HTTPException,status
+
 from src.models.user_model import User
 
 from src.schemas.user_schema import UserCreate
@@ -10,6 +10,9 @@ from src.exceptions.database_exception import (
     DatabaseUpdateException
 )
 
+from src.core.logger import logger
+
+
 # GET USER BY EMAIL
 def get_user_by_email(
     db: Session,
@@ -18,14 +21,22 @@ def get_user_by_email(
 
     try:
 
-        return (
+        query = (
             db.query(User)
             .filter(User.email == email)
-            .first()
         )
+
+        user = query.first()
+
+        return user
+
     except Exception as e:
 
-        raise DatabaseFetchException
+        logger.error(
+            f"Failed to fetch user by email: {str(e)}"
+        )
+
+        raise DatabaseFetchException()
 
 
 # GET USER BY ID
@@ -36,15 +47,22 @@ def get_user_by_id(
 
     try:
 
-        return (
+        query = (
             db.query(User)
             .filter(User.id == user_id)
-            .first()
         )
+
+        user = query.first()
+
+        return user
 
     except Exception as e:
 
-        raise DatabaseFetchException
+        logger.error(
+            f"Failed to fetch user by id: {str(e)}"
+        )
+
+        raise DatabaseFetchException()
 
 
 # CREATE USER
@@ -77,9 +95,12 @@ def create_user(
 
     except Exception as e:
 
-        print(e)
+        logger.error(
+            f"Failed to create user: {str(e)}"
+        )
 
-        raise e
+        raise DatabaseInsertException()
+
 
 # UPDATE USER
 def update_user(
@@ -101,7 +122,12 @@ def update_user(
 
         db.rollback()
 
-        raise DatabaseUpdateException
+        logger.error(
+            f"Failed to update user: {str(e)}"
+        )
+
+        raise DatabaseUpdateException()
+
 
 # DELETE USER
 def delete_user(
@@ -115,11 +141,14 @@ def delete_user(
 
         db.flush()
 
+        return True
+
     except Exception as e:
 
         db.rollback()
 
-        raise DatabaseUpdateException
-    
+        logger.error(
+            f"Failed to delete user: {str(e)}"
+        )
 
-
+        raise DatabaseUpdateException()

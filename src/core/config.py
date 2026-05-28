@@ -1,5 +1,6 @@
 from pydantic import SecretStr, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+import cloudinary
 
 
 class AppSettings(BaseSettings):
@@ -28,5 +29,23 @@ class AppSettings(BaseSettings):
     smtp_password: str
     smtp_host: str
     smtp_port: int
+    
+    cloudinary_cloud_name: str = Field(
+        alias="CLOUDINARY_CLOUD_NAME"
+    )
 
+    cloudinary_api_key: str = Field(
+        alias="CLOUDINARY_API_KEY"
+    )
+
+    cloudinary_api_secret: str = Field(
+        alias="CLOUDINARY_API_SECRET"
+    )
 settings = AppSettings()
+
+cloudinary.config(
+    cloud_name=settings.cloudinary_cloud_name,
+    api_key=settings.cloudinary_api_key,
+    api_secret=settings.cloudinary_api_secret,
+    secure=True
+)

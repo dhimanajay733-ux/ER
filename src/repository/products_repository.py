@@ -1,11 +1,22 @@
 from sqlalchemy.orm import Session
 
 from src.models.products_model import Product
+from src.models.subcategory_model import SubCategory
 from src.models.category_model import Category
 
 from src.schemas.product_schema import (
     ProductCreate,
     ProductUpdate
+)
+
+from src.schemas.product_schema import (
+    ProductFilter
+)
+
+from src.exceptions.database_exception import (
+    DatabaseInsertException,
+    DatabaseFetchException,
+    DatabaseUpdateException
 )
 
 
@@ -15,34 +26,42 @@ def create_product(
     payload: ProductCreate
 ):
 
-    product = Product(
+    try:
 
-        name=payload.name,
+        new_product = Product(
 
-        price=payload.price,
+            name=payload.name,
 
-        description=payload.description,
+            price=payload.price,
 
-        sub_category_id=payload.sub_category_id,
+            description=payload.description,
 
-        seller_id=payload.seller_id,
+            sub_category_id=payload.sub_category_id,
 
-        size=payload.size,
+            seller_id=payload.seller_id,
 
-        color=payload.color,
+            size=payload.size,
 
-        image_link=payload.image_link,
+            color=payload.color,
 
-        quantity=payload.quantity
-    )
+            image_link=payload.image_link,
 
-    db.add(product)
+            quantity=payload.quantity
+        )
 
-    db.flush()
+        db.add(new_product)
 
-    db.refresh(product)
+        db.flush()
 
-    return product
+        db.refresh(new_product)
+
+        return new_product
+
+    except Exception as e:
+
+        raise DatabaseInsertException(
+            str(e)
+        )
 
 
 # GET ALL PRODUCTS
@@ -50,56 +69,137 @@ def get_products(
     db: Session
 ):
 
-    return db.query(Product).all()
+    try:
 
+        query = db.query(Product)
+
+        products = query.all()
+
+        return products
+
+    except Exception as e:
+
+        raise DatabaseFetchException(
+            str(e)
+        )
+
+
+# SEARCH PRODUCTS
 
 # SEARCH PRODUCTS
 def search_products(
     db: Session,
-    search=None,
-    subcategory_id=None,
-    min_price=None,
-    max_price=None
+    filters: ProductFilter
 ):
 
-    query = db.query(Product)
+    try:
 
-    # SEARCH BY NAME
-    if search:
+        query = db.query(Product)
 
-        query = query.filter(
-            Product.name.ilike(f"%{search}%")
+        # SEARCH BY PRODUCT NAME
+        if (
+            filters.search
+            and filters.search.strip()
+            and filters.search != "string"
+        ):
+
+            query = query.filter(
+                Product.name.ilike(
+                    f"%{filters.search.strip()}%"
+                )
+            )
+
+        # FILTER BY CATEGORY
+        if (
+            filters.category_type
+            and filters.category_type.strip()
+            and filters.category_type != "string"
+        ):
+
+            query = (
+                query
+                .join(SubCategory)
+                .join(Category)
+                .filter(
+                    Category.type.ilike(
+                        f"%{filters.category_type.strip()}%"
+                    )
+                )
+            )
+
+        # FILTER BY SUBCATEGORY
+        if (
+            filters.subcategory_id is not None
+            and filters.subcategory_id > 0
+        ):
+
+            query = query.filter(
+                Product.sub_category_id
+                == filters.subcategory_id
+            )
+
+        # FILTER BY MIN PRICE
+        if (
+            filters.min_price is not None
+            and filters.min_price > 0
+        ):
+
+            query = query.filter(
+                Product.price >= filters.min_price
+            )
+
+        # FILTER BY MAX PRICE
+        if (
+            filters.max_price is not None
+            and filters.max_price > 0
+        ):
+
+            query = query.filter(
+                Product.price <= filters.max_price
+            )
+
+        # FILTER BY COLOR
+        if (
+            filters.color
+            and filters.color.strip()
+            and filters.color != "string"
+        ):
+
+            query = query.filter(
+                Product.color.ilike(
+                    f"%{filters.color.strip()}%"
+                )
+            )
+
+        # FILTER BY SIZE
+        if (
+            filters.size
+            and filters.size.strip()
+            and filters.size != "string"
+        ):
+
+            query = query.filter(
+                Product.size.ilike(
+                    f"%{filters.size.strip()}%"
+                )
+            )
+
+        # FILTER IN STOCK
+        if filters.in_stock is True:
+
+            query = query.filter(
+                Product.quantity > 0
+            )
+
+        products = query.all()
+
+        return products
+
+    except Exception as e:
+
+        raise DatabaseFetchException(
+            str(e)
         )
-    # JOIN EXAMPLE
-    if search:
-
-        query =query.filter(
-            Product
-        ).join(Category)
-
-    # FILTER BY SUBCATEGORY
-    if subcategory_id:
-
-        query = query.filter(
-            Product.sub_category_id == subcategory_id
-        )
-
-    # FILTER BY MIN PRICE
-    if min_price:
-
-        query = query.filter(
-            Product.price >= min_price
-        )
-
-    # FILTER BY MAX PRICE
-    if max_price:
-
-        query = query.filter(
-            Product.price <= max_price
-        )
-    
-    return query.all()
-
 
 # GET PRODUCT BY ID
 def get_product_by_id(
@@ -107,11 +207,22 @@ def get_product_by_id(
     product_id: int
 ):
 
-    return (
-        db.query(Product)
-        .filter(Product.id == product_id)
-        .first()
-    )
+    try:
+
+        query = (
+            db.query(Product)
+            .filter(Product.id == product_id)
+        )
+
+        product = query.first()
+
+        return product
+
+    except Exception as e:
+
+        raise DatabaseFetchException(
+            str(e)
+        )
 
 
 # UPDATE PRODUCT
@@ -121,41 +232,49 @@ def update_product(
     payload: ProductUpdate
 ):
 
-    if payload.name is not None:
+    try:
 
-        product.name = payload.name
+        if payload.name is not None:
 
-    if payload.price is not None:
+            product.name = payload.name
 
-        product.price = payload.price
+        if payload.price is not None:
 
-    if payload.description is not None:
+            product.price = payload.price
 
-        product.description = payload.description
+        if payload.description is not None:
 
-    if payload.size is not None:
+            product.description = payload.description
 
-        product.size = payload.size
+        if payload.size is not None:
 
-    if payload.color is not None:
+            product.size = payload.size
 
-        product.color = payload.color
+        if payload.color is not None:
 
-    if payload.image_link is not None:
+            product.color = payload.color
 
-        product.image_link = payload.image_link
+        if payload.image_link is not None:
 
-    if payload.quantity is not None:
+            product.image_link = payload.image_link
 
-        product.quantity = payload.quantity
+        if payload.quantity is not None:
 
-    db.add(product)
+            product.quantity = payload.quantity
 
-    db.flush()
+        db.add(product)
 
-    db.refresh(product)
+        db.flush()
 
-    return product
+        db.refresh(product)
+
+        return product
+
+    except Exception as e:
+
+        raise DatabaseUpdateException(
+            str(e)
+        )
 
 
 # DELETE PRODUCT
@@ -164,6 +283,14 @@ def delete_product(
     product: Product
 ):
 
-    db.delete(product)
+    try:
 
-    db.flush()
+        db.delete(product)
+
+        db.flush()
+
+        return True
+
+    except Exception as e:
+
+        raise e

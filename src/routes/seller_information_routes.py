@@ -24,6 +24,8 @@ from src.exceptions.common_exception import (
     NotFoundException
 )
 
+from src.core.logger import logger
+
 router = APIRouter(
     prefix="/api/seller-information",
     tags=["Seller Information"]
@@ -37,14 +39,28 @@ def create_seller_information_route(
     db: Session = Depends(get_db)
 ):
 
+    logger.info(
+        f"Received seller profile creation request: {user_data.user_id}"
+    )
+
     try:
 
-        return generate_seller_information(
+        seller = generate_seller_information(
             db=db,
             data=user_data
         )
 
+        logger.info(
+            f"Seller profile created successfully: {seller.id}"
+        )
+
+        return seller
+
     except AlreadyExistsException as e:
+
+        logger.warning(
+            f"Seller profile already exists: {user_data.user_id}"
+        )
 
         raise HTTPException(
             status_code=400,
@@ -52,6 +68,10 @@ def create_seller_information_route(
         )
 
     except NotFoundException as e:
+
+        logger.warning(
+            f"User not found for seller profile: {user_data.user_id}"
+        )
 
         raise HTTPException(
             status_code=404,
@@ -66,6 +86,10 @@ def get_seller_information_route(
     db: Session = Depends(get_db)
 ):
 
+    logger.info(
+        f"Fetching seller profile: {seller_id}"
+    )
+
     try:
 
         return fetch_seller_information(
@@ -74,6 +98,10 @@ def get_seller_information_route(
         )
 
     except NotFoundException as e:
+
+        logger.warning(
+            f"Seller profile not found: {seller_id}"
+        )
 
         raise HTTPException(
             status_code=404,
@@ -89,15 +117,29 @@ def update_seller_information_route(
     db: Session = Depends(get_db)
 ):
 
+    logger.info(
+        f"Updating seller profile: {seller_id}"
+    )
+
     try:
 
-        return modify_seller_information(
+        updated_seller = modify_seller_information(
             db=db,
             seller_id=seller_id,
             data=user_data
         )
 
+        logger.info(
+            f"Seller profile updated successfully: {seller_id}"
+        )
+
+        return updated_seller
+
     except NotFoundException as e:
+
+        logger.warning(
+            f"Seller profile not found for update: {seller_id}"
+        )
 
         raise HTTPException(
             status_code=404,

@@ -3,10 +3,9 @@ from fastapi import (
     Depends,
     HTTPException,
     UploadFile,
-    File,
-    Form
+    File
 )
-
+from src.core.logger import logger
 from sqlalchemy.orm import Session
 
 from src.db.session_db import get_db
@@ -14,6 +13,10 @@ from src.db.session_db import get_db
 from src.schemas.product_schema import (
     ProductCreate,
     ProductUpdate
+)
+
+from src.schemas.product_schema import (
+    ProductFilter
 )
 
 from src.services.product_service import (
@@ -35,55 +38,35 @@ router = APIRouter(
 )
 
 
-# CREATE PRODUCT
-@router.post("/")
-def create_product_api(
-
-    name: str = Form(...),
-
-    price: float = Form(...),
-
-    description: str = Form(...),
-
-    sub_category_id: int = Form(...),
-
-    seller_id: str = Form(...),
-
-    quantity: int = Form(...),
-
-    size: str | None = Form(None),
-
-    color: str | None = Form(None),
-
-    image: UploadFile = File(...),
-
-    db: Session = Depends(get_db)
+# UPLOAD IMAGE
+@router.post("/upload-image")
+def upload_product_image_api(
+    image: UploadFile = File(...)
 ):
+
+    logger.info(
+        f"Received image upload request: {image.filename}"
+    )
 
     image_url = upload_product_image(
         image.file
     )
 
-    payload = ProductCreate(
-
-        name=name,
-
-        price=price,
-
-        description=description,
-
-        sub_category_id=sub_category_id,
-
-        seller_id=seller_id,
-
-        quantity=quantity,
-
-        size=size,
-
-        color=color,
-
-        image_link=image_url
+    logger.info(
+        f"Returning uploaded image URL: {image_url}"
     )
+
+    return {
+        "image_url": image_url
+    }
+
+
+# CREATE PRODUCT
+@router.post("/")
+def create_product_api(
+    payload: ProductCreate,
+    db: Session = Depends(get_db)
+):
 
     return create_product(
         db=db,
@@ -96,35 +79,22 @@ def create_product_api(
 def get_products_api(
     db: Session = Depends(get_db)
 ):
+
     return get_products(db)
 
 
 # SEARCH PRODUCTS
-@router.get("/search/")
+@router.post("/search/")
 def search_products_api(
 
-    search: str | None = None,
-
-    subcategory_id: int | None = None,
-
-    min_price: float | None = None,
-
-    max_price: float | None = None,
+    filters: ProductFilter,
 
     db: Session = Depends(get_db)
 ):
 
     return search_products(
-
         db=db,
-
-        search=search,
-
-        subcategory_id=subcategory_id,
-
-        min_price=min_price,
-
-        max_price=max_price
+        filters=filters
     )
 
 

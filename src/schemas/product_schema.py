@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 
-
 class ProductCreate(BaseModel):
 
     name: str
@@ -23,3 +22,16 @@ class ProductUpdate(BaseModel):
     color: str | None = None
     image_link: str | None = None
     quantity: int | None = None
+
+class ProductFilter(BaseModel):
+
+    search: str | None = None
+    category_type: str | None = None
+    subcategory_id: int | None = None
+    min_price: int | None = None
+    max_price: int | None = None
+    color: str | None = None
+    size: str | None = None
+    in_stock: bool | None = None
+
+

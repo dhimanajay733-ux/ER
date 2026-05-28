@@ -9,6 +9,14 @@ from src.schemas.seller_information_schema import (
     UpdateSellerInformation
 )
 
+from src.core.logger import logger
+
+from src.exceptions.database_exception import (
+    DatabaseInsertException,
+    DatabaseFetchException,
+    DatabaseUpdateException
+)
+
 
 # CREATE SELLER INFO
 def create_seller_information(
@@ -16,20 +24,30 @@ def create_seller_information(
     data: CreateSellerInformation
 ):
 
-    new_seller = SellerInformation(
+    try:
 
-        user_id=data.user_id,
+        new_seller = SellerInformation(
 
-        store_name=data.store_name
-    )
+            user_id=data.user_id,
 
-    db.add(new_seller)
+            store_name=data.store_name
+        )
 
-    db.flush()
+        db.add(new_seller)
 
-    db.refresh(new_seller)
+        db.flush()
 
-    return new_seller
+        db.refresh(new_seller)
+
+        return new_seller
+
+    except Exception as e:
+
+        logger.error(
+            f"Failed to create seller profile: {str(e)}"
+        )
+
+        raise DatabaseInsertException()
 
 
 # GET BY USER ID
@@ -38,11 +56,24 @@ def get_seller_by_user_id(
     user_id: str
 ):
 
-    return (
-        db.query(SellerInformation)
-        .filter(SellerInformation.user_id == user_id)
-        .first()
-    )
+    try:
+
+        query = (
+            db.query(SellerInformation)
+            .filter(SellerInformation.user_id == user_id)
+        )
+
+        seller = query.first()
+
+        return seller
+
+    except Exception as e:
+
+        logger.error(
+            f"Failed to fetch seller by user id: {str(e)}"
+        )
+
+        raise DatabaseFetchException()
 
 
 # GET BY ID
@@ -51,11 +82,24 @@ def get_seller_by_id(
     seller_id: int
 ):
 
-    return (
-        db.query(SellerInformation)
-        .filter(SellerInformation.id == seller_id)
-        .first()
-    )
+    try:
+
+        query = (
+            db.query(SellerInformation)
+            .filter(SellerInformation.id == seller_id)
+        )
+
+        seller = query.first()
+
+        return seller
+
+    except Exception as e:
+
+        logger.error(
+            f"Failed to fetch seller by id: {str(e)}"
+        )
+
+        raise DatabaseFetchException()
 
 
 # UPDATE
@@ -65,18 +109,28 @@ def update_seller_information(
     data: UpdateSellerInformation
 ):
 
-    if data.store_name is not None:
+    try:
 
-        seller.store_name = data.store_name
+        if data.store_name is not None:
 
-    if data.status is not None:
+            seller.store_name = data.store_name
 
-        seller.status = data.status
+        if data.status is not None:
 
-    db.add(seller)
+            seller.status = data.status
 
-    db.flush()
+        db.add(seller)
 
-    db.refresh(seller)
+        db.flush()
 
-    return seller
+        db.refresh(seller)
+
+        return seller
+
+    except Exception as e:
+
+        logger.error(
+            f"Failed to update seller profile: {str(e)}"
+        )
+
+        raise DatabaseUpdateException()

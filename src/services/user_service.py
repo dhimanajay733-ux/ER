@@ -24,13 +24,20 @@ from src.services.otp_service import (
     generate_otp_service
 )
 
+from src.core.logger import logger
+
+
 # REGISTER USER
 def register_user(
     db: Session,
     user_data: UserCreate
 ):
-    
-    #CHECK ID USER EXISTS
+
+    logger.info(
+        f"Checking existing user: {user_data.email}"
+    )
+
+    # CHECK USER EXISTS
     existing_user = get_user_by_email(
         db,
         user_data.email
@@ -38,7 +45,15 @@ def register_user(
 
     if existing_user:
 
+        logger.warning(
+            f"User already exists: {user_data.email}"
+        )
+
         raise UserAlreadyExistsException()
+
+    logger.info(
+        f"Hashing password for: {user_data.email}"
+    )
 
     # HASH PASSWORD
     hashed_password = hash_password(
@@ -46,6 +61,10 @@ def register_user(
     )
 
     try:
+
+        logger.info(
+            f"Creating user: {user_data.email}"
+        )
 
         # CREATE USER
         new_user = create_user(
@@ -57,6 +76,10 @@ def register_user(
         # COMMIT USER
         db.commit()
 
+        logger.info(
+            f"User committed successfully: {new_user.email}"
+        )
+
         # GENERATE OTP
         generate_otp_service(
             db=db,
@@ -64,10 +87,20 @@ def register_user(
             otp_type="Email_Verification"
         )
 
+        logger.info(
+            f"OTP generated successfully: {new_user.email}"
+        )
+
         return new_user
 
     except Exception as e:
+
         db.rollback()
+
+        logger.error(
+            f"User registration failed: {str(e)}"
+        )
+
         raise e
 
 
@@ -78,6 +111,10 @@ def login_user(
     password: str
 ):
 
+    logger.info(
+        f"Fetching user for login: {email}"
+    )
+
     # GET USER
     user = get_user_by_email(
         db,
@@ -87,12 +124,24 @@ def login_user(
     # CHECK USER EXISTS
     if not user:
 
+        logger.warning(
+            f"Invalid login email: {email}"
+        )
+
         raise InvalidCredentialsException()
 
     # CHECK VERIFIED
     if not user.is_verified:
 
+        logger.warning(
+            f"Unverified user login attempt: {email}"
+        )
+
         raise UserNotVerifiedException()
+
+    logger.info(
+        f"Verifying password: {email}"
+    )
 
     # VERIFY PASSWORD
     is_valid_password = verify_password(
@@ -102,15 +151,31 @@ def login_user(
 
     if not is_valid_password:
 
+        logger.warning(
+            f"Invalid password attempt: {email}"
+        )
+
         raise InvalidCredentialsException()
+
+    logger.info(
+        f"Generating JTI for: {email}"
+    )
 
     # GENERATE JTI
     jti = generate_jti()
+
+    logger.info(
+        f"Generating access token: {email}"
+    )
 
     # CREATE ACCESS TOKEN
     access_token = create_access_token(
         user.id,
         jti
+    )
+
+    logger.info(
+        f"Login successful: {email}"
     )
 
     return {

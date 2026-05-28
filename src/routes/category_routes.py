@@ -26,6 +26,8 @@ from src.exceptions.common_exception import (
     NotFoundException
 )
 
+from src.core.logger import logger
+
 router = APIRouter(
     prefix="/api/categories",
     tags=["Category"]
@@ -39,14 +41,28 @@ def create_category_route(
     db: Session = Depends(get_db)
 ):
 
+    logger.info(
+        f"Received create category request: {user_data.type}"
+    )
+
     try:
 
-        return generate_category(
+        category = generate_category(
             db=db,
             data=user_data
         )
 
+        logger.info(
+            f"Category created successfully: {category.id}"
+        )
+
+        return category
+
     except AlreadyExistsException as e:
+
+        logger.warning(
+            f"Category already exists: {user_data.type}"
+        )
 
         raise HTTPException(
             status_code=400,
@@ -60,6 +76,10 @@ def get_all_categories_route(
     db: Session = Depends(get_db)
 ):
 
+    logger.info(
+        "Fetching all categories"
+    )
+
     return fetch_all_categories(db)
 
 
@@ -70,6 +90,10 @@ def get_single_category_route(
     db: Session = Depends(get_db)
 ):
 
+    logger.info(
+        f"Fetching category: {category_id}"
+    )
+
     try:
 
         return fetch_single_category(
@@ -78,6 +102,10 @@ def get_single_category_route(
         )
 
     except NotFoundException as e:
+
+        logger.warning(
+            f"Category not found: {category_id}"
+        )
 
         raise HTTPException(
             status_code=404,
@@ -93,15 +121,29 @@ def update_category_route(
     db: Session = Depends(get_db)
 ):
 
+    logger.info(
+        f"Updating category: {category_id}"
+    )
+
     try:
 
-        return modify_category(
+        updated_category = modify_category(
             db=db,
             category_id=category_id,
             data=user_data
         )
 
+        logger.info(
+            f"Category updated successfully: {category_id}"
+        )
+
+        return updated_category
+
     except NotFoundException as e:
+
+        logger.warning(
+            f"Category not found for update: {category_id}"
+        )
 
         raise HTTPException(
             status_code=404,
@@ -116,14 +158,28 @@ def delete_category_route(
     db: Session = Depends(get_db)
 ):
 
+    logger.info(
+        f"Deleting category: {category_id}"
+    )
+
     try:
 
-        return remove_category(
+        response = remove_category(
             db,
             category_id
         )
 
+        logger.info(
+            f"Category deleted successfully: {category_id}"
+        )
+
+        return response
+
     except NotFoundException as e:
+
+        logger.warning(
+            f"Category not found for deletion: {category_id}"
+        )
 
         raise HTTPException(
             status_code=404,

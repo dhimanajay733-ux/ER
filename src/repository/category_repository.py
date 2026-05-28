@@ -36,11 +36,14 @@ def get_category_by_id(
     category_id: str
 ):
 
-    return (
+    query = (
         db.query(Category)
         .filter(Category.id == category_id)
-        .first()
     )
+
+    category = query.first()
+
+    return category
 
 
 # GET CATEGORY BY TYPE
@@ -49,11 +52,14 @@ def get_category_by_type(
     type: str
 ):
 
-    return (
+    query = (
         db.query(Category)
         .filter(Category.type == type)
-        .first()
     )
+
+    category = query.first()
+
+    return category
 
 
 # GET ALL CATEGORIES
@@ -61,7 +67,11 @@ def get_all_categories(
     db: Session
 ):
 
-    return db.query(Category).all()
+    query = db.query(Category)
+
+    categories = query.all()
+
+    return categories
 
 
 # UPDATE CATEGORY
@@ -97,3 +107,5 @@ def delete_category(
     db.delete(category)
 
     db.flush()
+
+    return True

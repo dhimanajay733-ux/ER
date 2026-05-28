@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
+
 from src.db.session_db import get_db
+
 from src.schemas.user_schema import (
     UserCreate,
     UserResponse,
@@ -16,6 +18,8 @@ from src.services.token_service import (
     active_users,
     active_sessions
 )
+
+from src.core.logger import logger
 
 router = APIRouter(
     prefix="/api/auth",
@@ -33,10 +37,21 @@ def register(
     db: Session = Depends(get_db)
 ):
 
-    return register_user(
+    logger.info(
+        f"Received registration request: {user_data.email}"
+    )
+
+    user = register_user(
         db=db,
         user_data=user_data
     )
+
+    logger.info(
+        f"User registered successfully: {user.email}"
+    )
+
+    return user
+
 
 # LOGIN
 @router.post("/login")
@@ -45,17 +60,32 @@ def login(
     db: Session = Depends(get_db)
 ):
 
-    return login_user(
+    logger.info(
+        f"Received login request: {user_data.email}"
+    )
+
+    response = login_user(
         db=db,
         email=user_data.email,
         password=user_data.password
     )
 
-# Active users
+    logger.info(
+        f"User login successful: {user_data.email}"
+    )
+
+    return response
+
+
+# ACTIVE USERS
 @router.get("/active-users")
 def get_active_users_route(
     db: Session = Depends(get_db)
 ):
+
+    logger.info(
+        "Fetching active users count"
+    )
 
     total_users = active_users(db)
 

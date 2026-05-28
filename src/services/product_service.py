@@ -5,6 +5,10 @@ from src.schemas.product_schema import (
     ProductUpdate
 )
 
+from src.schemas.product_schema import (
+    ProductFilter
+)
+
 from src.repository.products_repository import (
 
     create_product as create_product_repository,
@@ -48,24 +52,14 @@ def get_products(
 # SEARCH PRODUCTS
 def search_products(
     db: Session,
-    search=None,
-    subcategory_id=None,
-    min_price=None,
-    max_price=None
+    filters: ProductFilter
 ):
 
     return search_products_repository(
-
         db=db,
-
-        search=search,
-
-        subcategory_id=subcategory_id,
-
-        min_price=min_price,
-
-        max_price=max_price
+        filters=filters
     )
+
 
 # GET PRODUCT BY ID
 def get_product_by_id(
@@ -77,6 +71,7 @@ def get_product_by_id(
         db,
         product_id
     )
+
 
 # UPDATE PRODUCT
 def update_product(
