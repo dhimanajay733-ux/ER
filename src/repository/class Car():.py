@@ -10,3 +10,6 @@ dict1=dict[
 ]
 print(dict1)
 #fuser -k PORT_NUMBER/tcp
+p='       Abhinav is a       Good Guy'
+T=p.strip()
+print(T)

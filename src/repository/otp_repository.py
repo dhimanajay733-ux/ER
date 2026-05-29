@@ -7,7 +7,6 @@ from src.exceptions.otp_exception import (
     OTPInvalidException
 )
 
-
 # CREATE OTP RECORD
 def create_otp_record(
     db: Session,
@@ -16,7 +15,7 @@ def create_otp_record(
     otp_type: str,
     expires_at
 ):
-
+    
     try:
 
         new_otp = OTPVerification(

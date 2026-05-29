@@ -34,6 +34,12 @@ class Product(
         nullable=False
     )
 
+    slug: Mapped[str] = mapped_column(
+        String(255),
+        unique=True,
+        nullable=False,
+        index=True
+    )
     price: Mapped[float] = mapped_column(
         Float,
         nullable=False

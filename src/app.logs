@@ -1,0 +1,415 @@
+2026-05-29 17:21:25,458 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 17:21:25,458 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,459 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 17:21:25,459 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,460 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 17:21:25,460 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,461 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 17:21:25,462 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 17:21:25,462 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,464 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 17:21:25,464 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,466 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 17:21:25,467 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,469 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 17:21:25,469 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,472 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 17:21:25,472 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,475 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 17:21:25,475 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,477 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 17:21:25,477 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:21:25,481 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 17:45:27,740 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 17:45:27,740 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,741 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 17:45:27,741 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,741 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 17:45:27,741 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,742 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 17:45:27,742 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 17:45:27,742 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,744 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 17:45:27,744 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,746 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 17:45:27,746 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,747 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 17:45:27,747 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,748 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 17:45:27,748 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,749 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 17:45:27,749 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,750 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 17:45:27,750 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:45:27,752 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 17:46:59,631 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 17:46:59,632 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,633 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 17:46:59,633 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,633 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 17:46:59,634 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,635 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 17:46:59,635 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 17:46:59,635 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,636 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 17:46:59,636 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,637 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 17:46:59,637 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,638 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 17:46:59,638 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,638 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 17:46:59,638 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,639 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 17:46:59,639 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,640 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 17:46:59,640 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:46:59,641 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 17:51:52,183 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 17:51:52,183 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,184 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 17:51:52,184 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,184 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 17:51:52,184 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,185 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 17:51:52,185 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 17:51:52,185 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,187 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 17:51:52,187 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,190 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 17:51:52,190 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,191 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 17:51:52,191 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,193 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 17:51:52,193 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,194 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 17:51:52,195 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,196 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 17:51:52,196 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:52,198 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 17:51:55,279 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 17:51:55,279 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,280 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 17:51:55,280 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,280 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 17:51:55,281 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,281 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 17:51:55,281 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 17:51:55,281 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,282 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 17:51:55,282 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,283 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 17:51:55,283 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,284 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 17:51:55,284 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,286 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 17:51:55,286 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,287 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 17:51:55,287 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,288 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 17:51:55,288 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:51:55,289 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 17:52:52,080 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 17:52:52,080 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,081 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 17:52:52,081 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,081 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 17:52:52,081 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,082 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 17:52:52,082 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 17:52:52,082 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,083 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 17:52:52,083 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,084 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 17:52:52,085 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,086 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 17:52:52,086 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,087 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 17:52:52,087 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,088 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 17:52:52,088 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,089 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 17:52:52,089 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:52:52,090 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 17:53:58,684 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 17:53:58,684 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,685 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 17:53:58,686 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,686 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 17:53:58,686 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,687 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 17:53:58,687 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 17:53:58,687 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,689 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 17:53:58,689 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,690 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 17:53:58,690 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,692 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 17:53:58,692 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,693 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 17:53:58,693 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,694 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 17:53:58,694 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,695 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 17:53:58,695 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:53:58,697 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 17:54:00,742 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 17:54:00,742 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,743 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 17:54:00,743 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,743 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 17:54:00,744 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,744 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 17:54:00,745 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 17:54:00,745 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,746 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 17:54:00,746 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,747 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 17:54:00,747 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,748 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 17:54:00,748 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,749 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 17:54:00,749 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,751 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 17:54:00,751 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,753 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 17:54:00,753 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:00,755 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 17:54:05,664 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 17:54:05,664 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,665 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 17:54:05,665 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,666 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 17:54:05,666 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,667 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 17:54:05,667 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 17:54:05,667 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,668 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 17:54:05,668 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,669 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 17:54:05,670 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,671 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 17:54:05,671 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,672 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 17:54:05,672 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,672 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 17:54:05,673 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,673 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 17:54:05,673 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 17:54:05,675 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:00:21,386 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 18:00:21,386 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,386 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 18:00:21,386 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,387 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 18:00:21,387 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,388 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:00:21,388 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 18:00:21,388 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,389 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 18:00:21,389 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,390 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 18:00:21,390 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,391 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 18:00:21,391 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,392 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 18:00:21,393 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,394 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 18:00:21,394 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,395 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 18:00:21,395 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:21,397 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:00:30,618 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 18:00:30,619 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,619 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 18:00:30,619 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,620 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 18:00:30,620 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,620 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:00:30,620 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 18:00:30,620 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,622 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 18:00:30,622 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,623 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 18:00:30,623 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,624 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 18:00:30,624 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,625 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 18:00:30,625 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,626 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 18:00:30,626 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,627 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 18:00:30,628 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:30,630 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:00:36,189 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 18:00:36,189 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,190 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 18:00:36,190 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,191 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 18:00:36,191 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,191 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:00:36,191 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 18:00:36,192 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,193 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 18:00:36,193 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,194 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 18:00:36,194 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,195 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 18:00:36,195 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,196 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 18:00:36,196 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,197 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 18:00:36,197 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,198 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 18:00:36,199 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:36,201 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:00:50,776 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 18:00:50,777 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,777 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 18:00:50,777 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,778 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 18:00:50,778 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,779 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:00:50,779 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 18:00:50,779 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,780 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 18:00:50,780 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,781 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 18:00:50,781 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,782 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 18:00:50,782 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,783 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 18:00:50,783 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,784 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 18:00:50,784 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,785 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 18:00:50,785 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:00:50,787 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:01:56,138 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 18:01:56,138 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,138 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 18:01:56,138 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,138 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 18:01:56,138 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,139 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:01:56,139 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 18:01:56,139 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,140 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 18:01:56,140 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,140 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 18:01:56,140 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,141 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 18:01:56,141 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,141 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 18:01:56,141 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,142 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 18:01:56,142 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,143 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 18:01:56,143 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:01:56,144 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:02:28,528 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 18:02:28,528 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,529 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 18:02:28,529 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,530 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 18:02:28,530 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,531 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:02:28,531 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 18:02:28,531 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,532 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 18:02:28,532 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,533 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 18:02:28,533 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,534 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 18:02:28,534 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,535 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 18:02:28,535 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,536 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 18:02:28,537 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,538 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 18:02:28,538 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:28,539 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:02:32,455 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 18:02:32,455 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,456 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 18:02:32,456 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,456 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 18:02:32,456 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,457 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:02:32,457 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 18:02:32,457 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,458 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 18:02:32,458 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,459 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 18:02:32,460 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,461 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 18:02:32,461 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,462 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 18:02:32,462 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,464 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 18:02:32,464 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,465 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 18:02:32,465 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:02:32,467 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:07:52,843 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:07:52,847 - INFO - sqlalchemy.engine.Engine - SELECT products.id AS products_id, products.name AS products_name, products.slug AS products_slug, products.price AS products_price, products.description AS products_description, products.sub_category_id AS products_sub_category_id, products.seller_id AS products_seller_id, products.size AS products_size, products.color AS products_color, products.image_link AS products_image_link, products.quantity AS products_quantity, products.created_at AS products_created_at, products.updated_at AS products_updated_at 
+FROM products
+2026-05-29 18:07:52,847 - INFO - sqlalchemy.engine.Engine - [generated in 0.00039s] {}
+2026-05-29 18:07:52,848 - ERROR - src.core.logger - Failed to fetch products: (pymysql.err.OperationalError) (1054, "Unknown column 'products.slug' in 'field list'")
+[SQL: SELECT products.id AS products_id, products.name AS products_name, products.slug AS products_slug, products.price AS products_price, products.description AS products_description, products.sub_category_id AS products_sub_category_id, products.seller_id AS products_seller_id, products.size AS products_size, products.color AS products_color, products.image_link AS products_image_link, products.quantity AS products_quantity, products.created_at AS products_created_at, products.updated_at AS products_updated_at 
+FROM products]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-05-29 18:07:52,849 - INFO - sqlalchemy.engine.Engine - ROLLBACK
+2026-05-29 18:13:38,970 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 18:13:38,972 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,973 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 18:13:38,973 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,973 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 18:13:38,974 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,974 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:13:38,974 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 18:13:38,974 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,975 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 18:13:38,975 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,975 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 18:13:38,976 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,976 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 18:13:38,976 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,977 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 18:13:38,977 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,978 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 18:13:38,978 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,979 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 18:13:38,979 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:13:38,980 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:13:41,292 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:13:41,294 - INFO - sqlalchemy.engine.Engine - SELECT products.id AS products_id, products.name AS products_name, products.slug AS products_slug, products.price AS products_price, products.description AS products_description, products.sub_category_id AS products_sub_category_id, products.seller_id AS products_seller_id, products.size AS products_size, products.color AS products_color, products.image_link AS products_image_link, products.quantity AS products_quantity, products.created_at AS products_created_at, products.updated_at AS products_updated_at 
+FROM products
+2026-05-29 18:13:41,294 - INFO - sqlalchemy.engine.Engine - [generated in 0.00017s] {}
+2026-05-29 18:13:41,296 - INFO - sqlalchemy.engine.Engine - ROLLBACK
+2026-05-29 18:21:14,119 - INFO - sqlalchemy.engine.Engine - SELECT DATABASE()
+2026-05-29 18:21:14,121 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,121 - INFO - sqlalchemy.engine.Engine - SELECT @@sql_mode
+2026-05-29 18:21:14,121 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,121 - INFO - sqlalchemy.engine.Engine - SELECT @@lower_case_table_names
+2026-05-29 18:21:14,121 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,122 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:21:14,122 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`users`
+2026-05-29 18:21:14,122 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,123 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`otp_verifications`
+2026-05-29 18:21:14,123 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,124 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`user_tokens`
+2026-05-29 18:21:14,125 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,126 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`categories`
+2026-05-29 18:21:14,126 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,127 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`subcategories`
+2026-05-29 18:21:14,127 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,128 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`products`
+2026-05-29 18:21:14,128 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,129 - INFO - sqlalchemy.engine.Engine - DESCRIBE `Mobile`.`seller_information`
+2026-05-29 18:21:14,130 - INFO - sqlalchemy.engine.Engine - [raw sql] {}
+2026-05-29 18:21:14,131 - INFO - sqlalchemy.engine.Engine - COMMIT
+2026-05-29 18:21:16,274 - INFO - sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-05-29 18:21:16,276 - INFO - sqlalchemy.engine.Engine - SELECT products.id AS products_id, products.name AS products_name, products.slug AS products_slug, products.price AS products_price, products.description AS products_description, products.sub_category_id AS products_sub_category_id, products.seller_id AS products_seller_id, products.size AS products_size, products.color AS products_color, products.image_link AS products_image_link, products.quantity AS products_quantity, products.created_at AS products_created_at, products.updated_at AS products_updated_at 
+FROM products
+2026-05-29 18:21:16,276 - INFO - sqlalchemy.engine.Engine - [generated in 0.00017s] {}
+2026-05-29 18:21:16,278 - INFO - sqlalchemy.engine.Engine - ROLLBACK

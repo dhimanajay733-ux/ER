@@ -1,5 +1,12 @@
 import random, uuid
+from slugify import slugify
 
+
+def generate_slug(
+    product_name: str
+):
+
+    return slugify(product_name)
 
 def generate_uuid() -> str:
 

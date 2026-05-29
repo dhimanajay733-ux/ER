@@ -32,6 +32,6 @@ class ProductFilter(BaseModel):
     max_price: int | None = None
     color: str | None = None
     size: str | None = None
-    in_stock: bool | None = None
+    stock_status: str | None = None
 
 

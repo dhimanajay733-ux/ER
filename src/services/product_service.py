@@ -4,7 +4,6 @@ from src.schemas.product_schema import (
     ProductCreate,
     ProductUpdate
 )
-
 from src.schemas.product_schema import (
     ProductFilter
 )
@@ -21,9 +20,13 @@ from src.repository.products_repository import (
 
     update_product as update_product_repository,
 
-    delete_product as delete_product_repository
-)
+    delete_product as delete_product_repository,
 
+    get_product_by_slug 
+)
+from src.exceptions.common_exception import (
+    NotFoundException
+)
 
 # CREATE PRODUCT
 def create_product(
@@ -39,7 +42,25 @@ def create_product(
     db.commit()
 
     return product
+# def create_products(
+#     db: Session,
+#     payload: list[ProductCreate]
+# ):
 
+#     products = []
+
+#     for product_data in payload:
+
+#         product = create_product_repository(
+#             db=db,
+#             payload=product_data
+#         )
+
+#         products.append(product)
+
+#     db.commit()
+
+#     return products
 
 # GET ALL PRODUCTS
 def get_products(
@@ -47,7 +68,6 @@ def get_products(
 ):
 
     return get_products_repository(db)
-
 
 # SEARCH PRODUCTS
 def search_products(
@@ -123,3 +143,22 @@ def delete_product(
     db.commit()
 
     return True
+
+#Get product by slug
+def fetch_product_by_slug(
+    db: Session,
+    slug: str
+):
+
+    product = get_product_by_slug(
+        db,
+        slug
+    )
+
+    if not product:
+
+        raise NotFoundException(
+            "Product not found"
+        )
+
+    return product

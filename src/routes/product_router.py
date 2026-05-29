@@ -25,7 +25,8 @@ from src.services.product_service import (
     search_products,
     get_product_by_id,
     update_product,
-    delete_product
+    delete_product,
+    fetch_product_by_slug
 )
 
 from src.services.cloudinary_service import (
@@ -169,3 +170,14 @@ def delete_product_api(
     return {
         "message": "Product deleted successfully"
     }
+
+@router.get("/slug/{slug}")
+def get_product_by_slug_route(
+    slug: str,
+    db: Session = Depends(get_db)
+):
+
+    return fetch_product_by_slug(
+        db,
+        slug
+    )
