@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.repository.user_repository import (
     get_user_by_email,
@@ -28,8 +28,8 @@ from src.core.logger import logger
 
 
 # REGISTER USER
-def register_user(
-    db: Session,
+async def register_user(
+    db: AsyncSession,
     user_data: UserCreate
 ):
 
@@ -38,7 +38,7 @@ def register_user(
     )
 
     # CHECK USER EXISTS
-    existing_user = get_user_by_email(
+    existing_user = await get_user_by_email(
         db,
         user_data.email
     )
@@ -67,7 +67,7 @@ def register_user(
         )
 
         # CREATE USER
-        new_user = create_user(
+        new_user = await create_user(
             db=db,
             user_data=user_data,
             hashed_password=hashed_password
@@ -81,9 +81,10 @@ def register_user(
         )
 
         # GENERATE OTP
-        generate_otp_service(
+        await generate_otp_service(
             db=db,
             email=new_user.email,
+            name=new_user.first_name,
             otp_type="Email_Verification"
         )
 
@@ -105,8 +106,8 @@ def register_user(
 
 
 # LOGIN USER
-def login_user(
-    db: Session,
+async def login_user(
+    db: AsyncSession,
     email: str,
     password: str
 ):
@@ -116,7 +117,7 @@ def login_user(
     )
 
     # GET USER
-    user = get_user_by_email(
+    user = await get_user_by_email(
         db,
         email
     )
@@ -144,7 +145,7 @@ def login_user(
     )
 
     # VERIFY PASSWORD
-    is_valid_password = verify_password(
+    is_valid_password = await verify_password(
         password,
         user.password
     )
@@ -162,14 +163,14 @@ def login_user(
     )
 
     # GENERATE JTI
-    jti = generate_jti()
+    jti = await generate_jti()
 
     logger.info(
         f"Generating access token: {email}"
     )
 
     # CREATE ACCESS TOKEN
-    access_token = create_access_token(
+    access_token = await create_access_token(
         user.id,
         jti
     )

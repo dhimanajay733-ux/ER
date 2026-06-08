@@ -1,15 +1,15 @@
 from sqlalchemy.orm import Session
-
+from sqlalchemy.ext.asyncio import AsyncSession
 from src.models.otp_model import OTPVerification
-
+from sqlalchemy import select
 from src.exceptions.otp_exception import (
     OTPGenerationException,
     OTPInvalidException
 )
 
 # CREATE OTP RECORD
-def create_otp_record(
-    db: Session,
+async def create_otp_record(
+    db: AsyncSession,
     user_id: int,
     otp_code: str,
     otp_type: str,
@@ -17,8 +17,8 @@ def create_otp_record(
 ):
     
     try:
-
-        new_otp = OTPVerification(
+ 
+        new_otp =  OTPVerification(
 
             user_id=user_id,
 
@@ -30,18 +30,17 @@ def create_otp_record(
 
             is_used=False
         )
-
         db.add(new_otp)
 
-        db.flush()
+        await db.flush()
 
-        db.refresh(new_otp)
+        await db.refresh(new_otp)
 
         return new_otp
 
     except Exception as e:
 
-        db.rollback()
+        await db.rollback()
 
         raise OTPGenerationException(
             str(e)
@@ -49,24 +48,22 @@ def create_otp_record(
 
 
 # GET VALID OTP
-def get_valid_otp(
-    db: Session,
+async def get_valid_otp(
+    db: AsyncSession,
     user_id: str,
     otp_code: str
 ):
 
     try:
-
-        otp_record = (
-            db.query(OTPVerification)
-            .filter(
+        stmt = select(OTPVerification
+        ).where(
                 OTPVerification.user_id == user_id,
                 OTPVerification.otp_code == otp_code,
                 OTPVerification.is_used == False
             )
-            .first()
-        )
-
+        result = await db.execute(stmt)
+        otp_record = result.scalar_one_or_none()
+        
         if not otp_record:
 
             raise OTPInvalidException()
@@ -79,8 +76,8 @@ def get_valid_otp(
 
 
 # MARK OTP AS USED
-def mark_otp_used(
-    db: Session,
+async def mark_otp_used(
+    db: AsyncSession,
     otp_record: OTPVerification
 ):
 
@@ -88,16 +85,14 @@ def mark_otp_used(
 
         otp_record.is_used = True
 
-        db.add(otp_record)
+        await db.flush()
 
-        db.flush()
-
-        db.refresh(otp_record)
+        await db.refresh(otp_record)
 
         return otp_record
 
     except Exception as e:
 
-        db.rollback()
+        await db.rollback()
 
         raise e

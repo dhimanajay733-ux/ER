@@ -1,17 +1,17 @@
-import smtplib
+import aiosmtplib
 import time
 
 from email.message import EmailMessage
 
 from sqlalchemy.orm import Session
-
+from sqlalchemy.ext.asyncio import AsyncSession
 from src.core.config import settings
 
 from src.repository.user_repository import (
     get_user_by_email,
     get_user_by_id
 )
-
+from fastapi import BackgroundTasks
 from src.repository.otp_repository import (
     create_otp_record,
     get_valid_otp,
@@ -30,17 +30,17 @@ from src.exceptions.otp_exception import (
     OTPExpiredException
 )
 
-
 # SEND OTP EMAIL
-def send_otp_email(
+async def send_otp_email(
     receiver: str,
+    first_name:str,
     code: str
 ):
 
     msg = EmailMessage()
 
     msg.set_content(
-        f"Your OTP verification code is: {code}"
+        f"Thank you for joining with us {first_name}\nYour OTP verification code is: {code}"
     )
 
     msg["Subject"] = "OTP Verification"
@@ -49,28 +49,25 @@ def send_otp_email(
 
     msg["To"] = receiver
 
-    with smtplib.SMTP_SSL(
-        settings.smtp_host,
-        settings.smtp_port
-    ) as server:
-
-        server.login(
-            settings.smtp_email,
-            settings.smtp_password
-        )
-
-        server.send_message(msg)
-
+    await aiosmtplib.send(
+        msg,
+        hostname=settings.smtp_host,
+        port=settings.smtp_port,
+        username=settings.smtp_email,
+        password=settings.smtp_password,
+        use_tls=True,
+    )
 
 # GENERATE OTP SERVICE
-def generate_otp_service(
-    db: Session,
+async def generate_otp_service(
+    db: AsyncSession,
     email: str,
+    name:str,
     otp_type:str
 ):
 
     # GET USER
-    user = get_user_by_email(
+    user = await get_user_by_email(
         db,
         email
     )
@@ -86,7 +83,7 @@ def generate_otp_service(
     # OTP EXPIRY (5 MINUTES)
     expires_at = int(time.time() * 1000) + (5 * 60 * 1000)
     # STORE OTP
-    create_otp_record(
+    await create_otp_record(
         db=db,
         user_id=user.id,
         otp_code=otp_code,
@@ -94,28 +91,28 @@ def generate_otp_service(
         expires_at=expires_at
     )
     # SEND EMAIL
-    send_otp_email(
+    await send_otp_email(
         email,
+        name,
         otp_code
     )
        # COMMIT
-    db.commit()
+    await db.commit()
 
 
     return {
         "message": "OTP sent successfully"
     }
 
-
 # VERIFY OTP SERVICE
-def verify_otp_service(
-    db: Session,
+async def verify_otp_service(
+    db: AsyncSession,
     user_id: str,
     otp_code: str
 ):
 
     # GET USER
-    user = get_user_by_id(
+    user = await get_user_by_id(
         db,
         user_id
     )
@@ -126,7 +123,7 @@ def verify_otp_service(
         raise UserNotFoundException()
 
     # GET OTP
-    otp_record = get_valid_otp(
+    otp_record = await get_valid_otp(
         db,
         user_id,
         otp_code
@@ -138,7 +135,7 @@ def verify_otp_service(
         raise OTPExpiredException()
 
     # MARK OTP USED
-    mark_otp_used(
+    await mark_otp_used(
         db,
         otp_record
     )
@@ -146,9 +143,7 @@ def verify_otp_service(
     # VERIFY USER
     user.is_verified = True
 
-    db.add(user)
-
-    db.commit()
+    await db.commit()
 
     return {
         "message": "OTP verified successfully"

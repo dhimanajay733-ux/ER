@@ -12,6 +12,7 @@ from src.routes.otp_routes import router as otp_router
 from src.routes.forgot_password_routes import(
      router as auth_routers
 )
+import asyncio
 from src.routes.reset_password_sevice import(
     router as auth_router
 )
@@ -28,7 +29,9 @@ app.include_router(router)
 
 
 @app.get("/info")
-def fun():
+async def fun():
+    print('Started')
+    await asyncio.sleep(5)
 
     return {
         "message": "This is a Production ready Code"
@@ -45,4 +48,6 @@ app.include_router(store_router)
 
 
 # print(Base.metadata.tables.keys())
-Base.metadata.create_all(bind=engine)
+async def init_db():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)

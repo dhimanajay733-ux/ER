@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db.session_db import get_db
 
@@ -32,16 +32,16 @@ router = APIRouter(
     response_model=UserResponse,
     status_code=status.HTTP_201_CREATED
 )
-def register(
+async def register(
     user_data: UserCreate,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
 
     logger.info(
         f"Received registration request: {user_data.email}"
     )
 
-    user = register_user(
+    user = await register_user(
         db=db,
         user_data=user_data
     )
@@ -57,7 +57,7 @@ def register(
 @router.post("/login")
 def login(
     user_data: UserLogin,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
 
     logger.info(
@@ -80,7 +80,7 @@ def login(
 # ACTIVE USERS
 @router.get("/active-users")
 def get_active_users_route(
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
 
     logger.info(

@@ -1,101 +1,112 @@
 from sqlalchemy.orm import Session
-
+from sqlalchemy.future import select
 from src.models.category_model import Category
-
+from sqlalchemy.ext.asyncio import AsyncSession
 from src.schemas.category_schema import (
     CreateCategory,
     UpdateCategory
 )
 
-
 # CREATE CATEGORY
-def create_category(
-    db: Session,
+async def create_category(
+    db: AsyncSession,
     data: CreateCategory
 ):
 
-    new_category = Category(
+    new_category =  Category(
 
         type=data.type,
 
         description=data.description
     )
-
+    print(type(db))
     db.add(new_category)
 
-    db.flush()
-
-    db.refresh(new_category)
+    await db.flush()
+    await db.refresh(new_category)
 
     return new_category
 
-
 # GET CATEGORY BY ID
-def get_category_by_id(
-    db: Session,
+async def get_category_by_id(
+    db: AsyncSession,
     category_id: str
 ):
+    stmt = select(Category).where(Category.id==category_id)
 
-    query = (
-        db.query(Category)
-        .filter(Category.id == category_id)
-    )
-
-    category = query.first()
+    result = await db.execute(stmt)
+     
+    category = result.scalars().all()
 
     return category
 
 
 # GET CATEGORY BY TYPE
-def get_category_by_type(
-    db: Session,
-    type: str
+# def get_category_by_type(
+#     db: Session,
+#     type: str
+# ):
+
+#     query = (
+#         db.query(Category)
+#         .filter(Category.type == type)
+#     )
+
+#     category = query.first()
+
+#     return category
+
+async def get_category_by_type(
+        db: AsyncSession,
+        type: str
 ):
+    stmt=select(Category).where(Category.type == type)
 
-    query = (
-        db.query(Category)
-        .filter(Category.type == type)
-    )
+    result= await db.execute(stmt)
 
-    category = query.first()
+    category = result.scalar_one_or_none()
 
-    return category
-
+    return  category
 
 # GET ALL CATEGORIES
-def get_all_categories(
-    db: Session
+async def get_all_categories(
+    db: AsyncSession
 ):
 
-    query = db.query(Category)
+# 1. Create a select statement
+    statement = select(Category)
 
-    categories = query.all()
+    # 2. Await the execution of the statement
+    result = await db.execute(statement)
 
-    return categories
+    # 3. Extract the actual database rows/objects
+    categories = result.scalars().all()
+    print(type(categories))
+    return  categories
 
 
 # UPDATE CATEGORY
-def update_category(
-    db: Session,
+async def update_category(
+    db: AsyncSession,
     category: Category,
     data: UpdateCategory
 ):
+    for c in category:
 
-    if data.type is not None:
+        if data.type is not None:
 
-        category.type = data.type
+            c.type = data.type
+        if data.description is not None:
 
-    if data.description is not None:
+            c.description = data.description
 
-        category.description = data.description
+    # db.add(category)
 
-    db.add(category)
-
-    db.flush()
+    # db.flush()
 
     db.refresh(category)
 
-    return category
+    return  category
 
 
 # DELETE CATEGORY

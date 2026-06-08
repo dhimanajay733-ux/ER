@@ -1,11 +1,11 @@
 from fastapi import (
     APIRouter,
     Depends,
-    HTTPException
+    HTTPException,
 )
 
 from sqlalchemy.orm import Session
-
+from sqlalchemy.ext.asyncio import AsyncSession
 from src.db.session_db import get_db
 
 from src.schemas.otp_schema import VerifyOTPRequest
@@ -34,14 +34,14 @@ router = APIRouter(
 
 #  GENERATE OTP
 @router.post("/generate")
-def generate_otp(
+async def generate_otp(
     email: str,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
 
     try:
 
-        return generate_otp_service(
+        return await generate_otp_service(
             db=db,
             email=email
         )
@@ -70,14 +70,14 @@ def generate_otp(
 
 # VERIFY OTP
 @router.post("/verify")
-def verify_otp(
+async def verify_otp(
     user_data: VerifyOTPRequest,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
 
     try:
 
-        return verify_otp_service(
+        return await verify_otp_service(
             db=db,
             user_id=user_data.user_id,
             otp_code=user_data.otp_code

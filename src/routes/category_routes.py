@@ -3,6 +3,7 @@ from fastapi import (
     Depends,
     HTTPException
 )
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from sqlalchemy.orm import Session
 
@@ -36,9 +37,9 @@ router = APIRouter(
 
 # CREATE CATEGORY
 @router.post("/")
-def create_category_route(
+async def create_category_route(
     user_data: CreateCategory,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
 
     logger.info(
@@ -47,7 +48,7 @@ def create_category_route(
 
     try:
 
-        category = generate_category(
+        category = await generate_category(
             db=db,
             data=user_data
         )
@@ -72,22 +73,22 @@ def create_category_route(
 
 # GET ALL CATEGORIES
 @router.get("/")
-def get_all_categories_route(
-    db: Session = Depends(get_db)
+async def get_all_categories_route(
+    db: AsyncSession = Depends(get_db)
 ):
 
     logger.info(
         "Fetching all categories"
     )
 
-    return fetch_all_categories(db)
+    return await fetch_all_categories(db)
 
 
 # GET SINGLE CATEGORY
 @router.get("/{category_id}")
-def get_single_category_route(
+async def get_single_category_route(
     category_id: str,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
 
     logger.info(
@@ -96,7 +97,7 @@ def get_single_category_route(
 
     try:
 
-        return fetch_single_category(
+        return await fetch_single_category(
             db,
             category_id
         )
@@ -115,10 +116,10 @@ def get_single_category_route(
 
 # UPDATE CATEGORY
 @router.put("/{category_id}")
-def update_category_route(
+async def update_category_route(
     category_id: str,
     user_data: UpdateCategory,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
 
     logger.info(
@@ -127,7 +128,7 @@ def update_category_route(
 
     try:
 
-        updated_category = modify_category(
+        updated_category = await modify_category(
             db=db,
             category_id=category_id,
             data=user_data

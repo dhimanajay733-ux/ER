@@ -1,5 +1,5 @@
-from sqlalchemy.orm import Session
-
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 from src.models.user_model import User
 
 from src.schemas.user_schema import UserCreate
@@ -14,19 +14,15 @@ from src.core.logger import logger
 
 
 # GET USER BY EMAIL
-def get_user_by_email(
-    db: Session,
+async def get_user_by_email(
+    db: AsyncSession,
     email: str
 ):
 
     try:
-
-        query = (
-            db.query(User)
-            .filter(User.email == email)
-        )
-
-        user = query.first()
+        stmt = select(User).where(User.email == email)
+        result= await db.execute(stmt)
+        user= result.scalar_one_or_none()
 
         return user
 
@@ -40,19 +36,15 @@ def get_user_by_email(
 
 
 # GET USER BY ID
-def get_user_by_id(
-    db: Session,
+async def get_user_by_id(
+    db: AsyncSession,
     user_id: int
 ):
 
     try:
-
-        query = (
-            db.query(User)
-            .filter(User.id == user_id)
-        )
-
-        user = query.first()
+        stmt = select(User).where(User.id == user_id)
+        result = await db.execute(stmt)
+        user = result.scalar_one_or_none
 
         return user
 
@@ -66,8 +58,8 @@ def get_user_by_id(
 
 
 # CREATE USER
-def create_user(
-    db: Session,
+async def create_user(
+    db: AsyncSession,
     user_data: UserCreate,
     hashed_password: str
 ):
@@ -86,10 +78,10 @@ def create_user(
         )
 
         db.add(new_user)
+       
+        await db.flush()
 
-        db.flush()
-
-        db.refresh(new_user)
+        await db.refresh(new_user)
 
         return new_user
 
@@ -103,18 +95,16 @@ def create_user(
 
 
 # UPDATE USER
-def update_user(
-    db: Session,
+async def update_user(
+    db: AsyncSession,
     user: User
 ):
 
     try:
 
-        db.add(user)
+        await db.flush()
 
-        db.flush()
-
-        db.refresh(user)
+        await db.refresh(user)
 
         return user
 
@@ -130,22 +120,22 @@ def update_user(
 
 
 # DELETE USER
-def delete_user(
-    db: Session,
+async def delete_user(
+    db: AsyncSession,
     user: User
 ):
 
     try:
 
-        db.delete(user)
+        await db.delete(user)
 
-        db.flush()
+        await db.flush()
 
         return True
 
     except Exception as e:
 
-        db.rollback()
+        await db.rollback()
 
         logger.error(
             f"Failed to delete user: {str(e)}"

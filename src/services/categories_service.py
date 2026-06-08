@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-
+from sqlalchemy.ext.asyncio import AsyncSession
 from src.schemas.category_schema import (
     CreateCategory,
     UpdateCategory
@@ -23,8 +23,8 @@ from src.core.logger import logger
 
 
 # CREATE CATEGORY
-def generate_category(
-    db: Session,
+async def generate_category(
+    db: AsyncSession,
     data: CreateCategory
 ):
 
@@ -32,7 +32,7 @@ def generate_category(
         f"Checking existing category: {data.type}"
     )
 
-    existing_category = get_category_by_type(
+    existing_category = await get_category_by_type(
         db,
         data.type
     )
@@ -53,12 +53,12 @@ def generate_category(
             f"Creating category: {data.type}"
         )
 
-        new_category = create_category(
+        new_category = await create_category(
             db=db,
             data=data
         )
 
-        db.commit()
+        await db.commit()
 
         logger.info(
             f"Category committed successfully: {new_category.id}"
@@ -78,20 +78,20 @@ def generate_category(
 
 
 # GET ALL CATEGORIES
-def fetch_all_categories(
-    db: Session
+async def fetch_all_categories(
+    db: AsyncSession
 ):
 
     logger.info(
         "Fetching all categories from database"
     )
 
-    return get_all_categories(db)
+    return await  get_all_categories(db)
 
 
 # GET SINGLE CATEGORY
-def fetch_single_category(
-    db: Session,
+async def fetch_single_category(
+    db: AsyncSession,
     category_id: str
 ):
 
@@ -99,7 +99,7 @@ def fetch_single_category(
         f"Fetching category by id: {category_id}"
     )
 
-    category = get_category_by_id(
+    category = await get_category_by_id(
         db,
         category_id
     )
@@ -114,12 +114,12 @@ def fetch_single_category(
             "Category not found"
         )
 
-    return category
+    return  category
 
 
 # UPDATE CATEGORY
-def modify_category(
-    db: Session,
+async def modify_category(
+    db: AsyncSession,
     category_id: str,
     data: UpdateCategory
 ):
@@ -128,7 +128,7 @@ def modify_category(
         f"Checking category before update: {category_id}"
     )
 
-    category = get_category_by_id(
+    category = await get_category_by_id(
         db,
         category_id
     )
@@ -149,13 +149,13 @@ def modify_category(
             f"Updating category: {category_id}"
         )
 
-        updated_category = update_category(
+        updated_category = await update_category(
             db=db,
             category=category,
             data=data
         )
 
-        db.commit()
+        await db.commit()
 
         logger.info(
             f"Category updated successfully: {category_id}"

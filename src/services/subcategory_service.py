@@ -27,7 +27,7 @@ from src.core.logger import logger
 
 
 # CREATE SUBCATEGORY
-def generate_subcategory(
+async def generate_subcategory(
     db: Session,
     data: CreateSubCategory
 ):
@@ -37,7 +37,7 @@ def generate_subcategory(
     )
 
     # CHECK CATEGORY EXISTS
-    category = get_category_by_id(
+    category = await get_category_by_id(
         db,
         data.category_id
     )
@@ -57,12 +57,12 @@ def generate_subcategory(
     )
 
     # CHECK SUBCATEGORY EXISTS
-    existing_subcategory = get_subcategory_by_type(
+    existing_subcategory = await get_subcategory_by_type(
         db,
         data.type
     )
 
-    if existing_subcategory:
+    if await existing_subcategory:
 
         logger.warning(
             f"Subcategory already exists: {data.type}"
@@ -78,7 +78,7 @@ def generate_subcategory(
             f"Creating subcategory: {data.type}"
         )
 
-        new_subcategory = create_subcategory(
+        new_subcategory = await create_subcategory(
             db=db,
             data=data
         )
@@ -103,7 +103,7 @@ def generate_subcategory(
 
 
 # GET ALL SUBCATEGORIES
-def fetch_all_subcategories(
+async def fetch_all_subcategories(
     db: Session
 ):
 
